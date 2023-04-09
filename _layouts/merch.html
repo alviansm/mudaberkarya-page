@@ -1,0 +1,47 @@
+---
+layout: default
+bodyClass: "page-teams"
+---
+
+<div class="container pt-6 pb-6">
+    <div class="row">
+        {% assign promoted_merch = site.merch | where: "promoted", true | sort: "weight" %}
+        {% for mer in promoted_merch %}
+        <div class="col-12 col-md-6 mb-2">
+            <div class="team team-summary team-summary-large">
+                {% if mer.image %}
+                <div class="team-image">
+                    <img width="90" height="90" alt="{{ mer.title }}" class="img-fluid mb-2" src="{{ mer.image | relative_url }}" />
+                </div>
+                {% endif %}
+                <div class="team-meta">
+                    <h2 class="team-name"><a href="{{ mer.url | relative_url }}">{{ mer.title }}</a></h2>
+                    <p class="team-description">{{ mer.variation }}</p>
+                    {% if mer.linkedinurl %}
+                    <a target="_blank" href="{{ team.linkedinurl }}" rel="noreferrer">Beli</a>
+                    {% endif %}
+                </div>
+                <div class="team-content">{{ mer.content | truncate: 120 }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row pt-6 pb-6">
+        {% assign merchs = site.merch | where: "promoted", empty | sort: "weight" %}
+        {% for merch in merchs %}
+        <div class="col-12 col-md-4 mb-3">
+            <div class="team team-summary">
+                {% if merch.image %}
+                <div class="team-image">
+                    <img width="60" height="60" alt="{{ team.title }}" class="img-fluid mb-2" src="{{ merch.image | relative_url }}" />
+                </div>
+                {% endif %}
+                <div class="team-meta">
+                    <h2 class="team-name"><a href="{{ merch.url | relative_url }}">{{ merch.title }}</a></h2>
+                    <p class="team-description">{{ merch.variation }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
